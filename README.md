@@ -1,5 +1,5 @@
 # Edge-flipping Animation
-Yanning Tan and Ziyue Yang
+Yanning Tan and [Ziyue Yang](https://github.com/zyang2k), Smith College
 
 ## Introduction
 
