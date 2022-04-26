@@ -8,7 +8,7 @@
 
   [Graham scan](https://replit.com/@ZiyueYang1/Graham-animation#README.md) is implemented to compute the convex hull. [Triangle-splitting](https://replit.com/@ZiyueYang1/Triangle-Splitting-Animation#README.md) is implemented to triangulate the hull. 
 
-  An animation is also generated to visualize the splitting process via `matplotlib`. 
+  An animation is also generated to visualize the flipping process via `matplotlib`. 
 
 ## Background
 
