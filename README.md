@@ -3,30 +3,30 @@
 
 ## Introduction
 
-    This project is an implementation of Edge-flipping algorithm of Delaunay triangulation. Delaunay triangulations maximize the minimum angle of all the angles of the triangles in the triangulation. This algorithm  takes in a certain number of randomly generated points in general position and returns a Delaunay triangulation.
+  This project is an implementation of Edge-flipping algorithm of Delaunay triangulation. Delaunay triangulations maximize the minimum angle of all the angles of the triangles in the triangulation. This algorithm  takes in a certain number of randomly generated points in general position and returns a Delaunay triangulation.
 
 
-    [Graham scan](https://replit.com/@ZiyueYang1/Graham-animation#README.md) is implemented to compute the convex hull. [Triangle-splitting](https://replit.com/@ZiyueYang1/Triangle-Splitting-Animation#README.md) is implemented to triangulate the hull. 
+  [Graham scan](https://replit.com/@ZiyueYang1/Graham-animation#README.md) is implemented to compute the convex hull. [Triangle-splitting](https://replit.com/@ZiyueYang1/Triangle-Splitting-Animation#README.md) is implemented to triangulate the hull. 
 
-    An animation is also generated to visualize the splitting process via `matplotlib`. 
+  An animation is also generated to visualize the splitting process via `matplotlib`. 
 
 ## Background
 
 ### Empty circle property 
 
-    Retrieved from **Theorem 3.53**.
+  Retrieved from **Theorem 3.53**.
 
-    Let S be a point set in general position. A triangulation T is a Delaunay triangulation if and only if no points from S is in the interior of any circumcircle of a triangle of T.
+  Let S be a point set in general position. A triangulation T is a Delaunay triangulation if and only if no points from S is in the interior of any circumcircle of a triangle of T.
 
 ### Edge Flipping Algorithm
 
-    Retrieved from **p. 83**. 
+  Retrieved from **p. 83**. 
 
-    Let S be a point set in general position. Start with any triangulation T. If two triangles do not meet the Delaunay condition, switching the common edge BD for the common edge AC produces two triangles that do meet the Delaunay condition. Continue flipping illegal edges, moving through the flip graph of S in any order, until no more illegal edges remain. 
+  Let S be a point set in general position. Start with any triangulation T. If two triangles do not meet the Delaunay condition, switching the common edge BD for the common edge AC produces two triangles that do meet the Delaunay condition. Continue flipping illegal edges, moving through the flip graph of S in any order, until no more illegal edges remain. 
 
 ### How we handled cocircular points
 
-    We did not eliminate cocircular points when we generated points in general position. Instead, the situation of 4 points cocircular was treated as a **valid** Delaunay.
+  We did not eliminate cocircular points when we generated points in general position. Instead, the situation of 4 points cocircular was treated as a **valid** Delaunay.
 ## Code walk-through
 
 ```
