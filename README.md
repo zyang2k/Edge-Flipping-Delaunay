@@ -5,7 +5,9 @@
 
 ## Introduction
 
-This project is an implementation of Edge-flipping algorithm of Delaunay triangulation. Delaunay triangulations maximize the minimum angle of all the angles of the triangles in the triangulation. This algorithm  takes in a certain number of randomly generated points in general position and returns a Delaunay triangulation.
+This project is an implementation of Edge-flipping algorithm of Delaunay triangulation. Delaunay triangulations maximize the minimum angle of all the angles of the triangles in the triangulation, and this trait makes it especially imporatant for terrain reconstruction.
+
+This algorithm  takes in a certain number of randomly generated points in general position and returns a Delaunay triangulation.
 
 
 [Graham scan](https://replit.com/@ZiyueYang1/Graham-animation#README.md) is implemented to compute the convex hull. [Triangle-splitting](https://replit.com/@ZiyueYang1/Triangle-Splitting-Animation#README.md) is implemented to triangulate the hull. 
