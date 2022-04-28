@@ -5,7 +5,7 @@
 
 ## Introduction
 
-This project is an implementation of Edge-flipping algorithm of Delaunay triangulation. Delaunay triangulations maximize the minimum angle of all the angles of the triangles in the triangulation, and this trait makes it especially imporatant for terrain reconstruction.
+This project is an implementation of Edge-flipping algorithm of Delaunay triangulation. Delaunay triangulations maximize the minimum angle in any triangle in the triangulation, and this trait makes it especially imporatant for terrain reconstruction.
 
 This algorithm  takes in a certain number of randomly generated points in general position and returns a Delaunay triangulation.
 
