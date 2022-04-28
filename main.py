@@ -16,11 +16,11 @@ def generalPosition(numOfPoints):
   
   # initiate w/ two points
   for h in range(2):
-    points_in_general.append(Point(random.randint(-5, 5), random.randint(-5, 5)))
+    points_in_general.append(Point(random.randint(-10, 10), random.randint(-10, 10)))
     
   # generate points in general position
   for i in range(numOfPoints-2):
-    currentPoint = Point(random.randint(-5, 5), random.randint(-5, 5))
+    currentPoint = Point(random.randint(-10, 10), random.randint(-10, 10))
     
     # set the default of boolean isColinear to False
     isColinear = False 
@@ -76,21 +76,35 @@ def findTriangles(triangle_list, diagonal):
 
   return quadrilateral_list, paired_triangle_list
    
-def checkSameDiagonalList(new_diagonal_list, old_diagonal_list):
+
+def checkSameDiagonalList(old_diagonal_list, new_diagonal_list):
   """
-  This function returns True if Delaunay triangulation is reached
+  This function tests if we reached Delaunay 
   """
-  for new_diag in new_diagonal_list:
-    for old_diag in old_diagonal_list:
-      
-      # check if new diagonal == old diagonal regardless of orientation of the diagoanl
-      if new_diag[0] in old_diag and new_diag[1] in old_diag:
-        continue
-        
-      else:
-        return False # return False if any inconsistency was found
+  # set up a counter
+  old_diag_len = len(old_diagonal_list)
+
+  # return False for the first iteration since new_diagonal_list must be empty for the first iteration
+  if new_diagonal_list == []:
+      return False
   
-  return True
+  else:
+      for new_diag in new_diagonal_list:
+        for old_diag in old_diagonal_list:
+          # check if new diagonal == old diagonal regardless of orientation of the diagoanl
+          if new_diag[0] in old_diag and new_diag[1] in old_diag:
+            old_diag_len -= 1 # one match found! check other new diagonals
+            break
+            
+          else:
+            continue # check other old diagonals with this new diagonal
+      
+      if old_diag_len == 0: # all old diagonals found a match
+          return True
+      
+      else: # mismatch found among old diagonal list
+          return False
+
 
 def diagonalFlip(diagonal_list, triangle_list):
   """
@@ -98,22 +112,22 @@ def diagonalFlip(diagonal_list, triangle_list):
   """
   #initiate the newer/updated version of diagonal_list 
   new_diagonal_list = []
-
+ 
   # Stop flipping if reached Delaunay
-  while checkSameDiagonalList(new_diagonal_list, diagonal_list): 
-
+  while checkSameDiagonalList(diagonal_list, new_diagonal_list) == False: 
+      
     # make sure that diagonal_list is one version behind new_diagonal_list
     # only update diagonal_list to the newer verison when we have a non empty newer version
     if new_diagonal_list != []:
       diagonal_list = new_diagonal_list
 
-    # initialize an empty list for the first iteration
-    new_diagonal_list = []
+      # build a new empty diagonal list
+      new_diagonal_list = []
     
   
-    # diagonal_index = 0
-    for diagonal in diagonal_list:
     
+    for diagonal in diagonal_list:
+      
       # find correspondence quadrilateral and the vertices
       quadrilateral_list, paired_triangle_list = findTriangles(triangle_list, diagonal)
 
@@ -128,7 +142,7 @@ def diagonalFlip(diagonal_list, triangle_list):
       circle = drawCircle(center, radius)
       time.sleep(1)
       
-      #Since our points are sorted clockwise, incirclefast >= 0 indicates a valid Delaunay
+      #Since our points are sorted clockwise, incirclefast >= 0 indicates a valid Delaunay. When four points are cocircular, no edge flip happens.
       if incirclefast(sortedTriangle[0],sortedTriangle[1],sortedTriangle[2], checkpoint) >= 0:
         new_diagonal_list.append(diagonal)
         circle.remove()
@@ -156,7 +170,7 @@ def diagonalFlip(diagonal_list, triangle_list):
           triangle_list.remove(triangle)
         triangle_list.append([new_diagonal[0],new_diagonal[1],diagonal[0]])
         triangle_list.append([new_diagonal[0],new_diagonal[1],diagonal[1]])
-      
+    
   return new_diagonal_list
 
 
@@ -186,9 +200,10 @@ def drawInitGraphStatic(pointSet, diagonal_list,pointsOnHull):
 
 def removeDiagonal(gid):
   """
+  Code retrieved from https://stackoverflow.com/a/40183433
   This function removes the illegal diagonal visually
   """
-  for c in ax.lines: # possibly better to use: for c in plt.lines (see comment)  
+  for c in ax.lines:  
     # get the current group id and check if its identical to that of the invalid diagonal, if so, remove the diagonal
     if c.get_gid() == gid: 
       c.remove()
@@ -221,7 +236,7 @@ def drawDiagonal(diagonal, color, thickness = 1):
 
 
 # generate points in general position
-test_1 = generalPosition(numOfPoints = 20)
+test_1 = generalPosition(numOfPoints = 100)
 
 # perform triangle splitting
 pointsOnHull, sortedPointList = grahamScan(test_1)
